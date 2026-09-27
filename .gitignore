@@ -1,0 +1,9 @@
+node_modules/
+package-lock.json
+package.json
+*.pdf
+*.docx
+__pycache__/
+# personal data never belongs in this repo
+record.json
+applications/

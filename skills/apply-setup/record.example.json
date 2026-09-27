@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "example": true,
+    "purpose": "Single source of truth for the candidate. The CV writer may only put claims on a CV that trace back to this file. /apply-setup builds it from your current CV; delete _meta.example when it's real.",
+    "rules": [
+      "Never invent skills, tools, numbers or experience that are not in this file.",
+      "Never name anything listed under experience[].confidential on a CV.",
+      "null means unknown: ask, never guess."
+    ]
+  },
+
+  "personal": {
+    "name": "Jane Doe",
+    "nationality": null,
+    "languages": "English (native), Spanish (professional)",
+    "location": "Lisbon, Portugal",
+    "email": "jane.doe@example.com",
+    "phone": "+351 000 000 000",
+    "linkedin": "linkedin.com/in/jane-doe-example",
+    "github": "github.com/jane-doe-example",
+    "cv_contact": ["jane.doe@example.com", "+351 000 000 000", "linkedin.com/in/jane-doe-example", "github.com/jane-doe-example"]
+  },
+
+  "target": {
+    "headline": "Cloud Engineer",
+    "seniority": "Junior / entry level (0-2 years)",
+    "roles": ["Cloud Engineer", "DevOps Engineer", "Site Reliability Engineer"],
+    "default_search_location": "Lisbon, Portugal",
+    "stack_keywords": ["AWS", "Terraform", "Kubernetes", "Docker", "GitHub Actions", "Prometheus", "Grafana", "Linux", "Python", "Bash"]
+  },
+
+  "education": [
+    { "degree": "BSc Computer Engineering", "school": "Example University", "location": "Lisbon, Portugal", "graduated": "Jun 2025", "gpa": null, "coursework": ["Networks", "Operating Systems", "Cloud Computing"] }
+  ],
+
+  "experience": [
+    {
+      "company": "Example Corp",
+      "company_blurb": "Example Corp builds logistics software for retailers",
+      "cv_title": "Junior Cloud Engineer",
+      "location": "Lisbon, Portugal",
+      "start_date": "2025-09-01",
+      "end_date": null,
+      "confidential": { "retail_client": "Never name the retail client on a CV; write 'a retail client'." },
+      "facts": [
+        {
+          "area": "Infrastructure as Code",
+          "fact": "Migrated 12 manually created AWS resources into Terraform modules with remote state in S3, cutting environment setup from 2 days to 40 minutes.",
+          "keywords": ["Terraform", "AWS", "IaC", "S3", "automation"]
+        },
+        {
+          "area": "CI/CD",
+          "fact": "Built GitHub Actions pipelines for 3 services with unit tests, image scanning and staged deploys to EKS.",
+          "keywords": ["GitHub Actions", "CI/CD", "EKS", "Kubernetes", "testing"]
+        },
+        {
+          "area": "Observability",
+          "fact": "Set up Prometheus and Grafana dashboards and 9 alert rules for the checkout service.",
+          "keywords": ["Prometheus", "Grafana", "monitoring", "alerting"]
+        }
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "title": "Homelab Kubernetes Cluster",
+      "role": "Personal project",
+      "dates": "2024",
+      "facts": ["Ran a 3-node k3s cluster on Raspberry Pis with Argo CD, cert-manager and Longhorn storage."],
+      "keywords": ["Kubernetes", "k3s", "Argo CD", "GitOps"],
+      "include_by_default": true
+    }
+  ],
+
+  "volunteering": [],
+  "achievements": [],
+  "certifications": ["AWS Certified Cloud Practitioner (2025)"],
+
+  "skills": {
+    "hard": {
+      "cloud": ["AWS (EC2, S3, EKS, IAM, RDS)"],
+      "iac": ["Terraform"],
+      "ci_cd": ["GitHub Actions"],
+      "containers": ["Docker", "Kubernetes"],
+      "observability": ["Prometheus", "Grafana"],
+      "scripting": ["Python", "Bash"]
+    },
+    "soft": ["Problem-Solving", "Communication", "Collaboration"],
+    "weak_evidence": { "Ansible": "Used once in a course; no work evidence." },
+    "never_claim": { "Azure": "No experience.", "Go": "Only a tutorial." }
+  },
+
+  "known_gaps": ["About 1 year of experience."],
+
+  "application_answers": {
+    "salary_expectation": null,
+    "notice_period": null,
+    "work_authorization": null,
+    "requires_visa_sponsorship": null,
+    "willing_to_relocate": null
+  },
+
+  "cv_preferences": {
+    "max_pages": 1,
+    "section_order": ["Summary", "Professional Experience", "Projects", "Education", "Skills"],
+    "headline": "Cloud Engineer",
+    "summary": "Plain and factual, 2-3 lines.",
+    "bullets": "Lead with strong action verbs. Real numbers wherever the record has them.",
+    "never_on_cv": ["client names", "references"]
+  }
+}
