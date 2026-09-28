@@ -1,6 +1,6 @@
 """LinkedIn public (logged-out) job pages -> compact JSON on stdout. Stdlib only, never logs in.
   python li.py search "<keywords>" "<location>" <f_E: 2 | 2,3> [start] [days=30]
-      drops job IDs already in $APPLY_HOME/applications/master_list.json and senior/lead/manager titles
+      drops job IDs already in $APPLY_HOME/applications/master_list.json, and senior/lead/manager titles when target.seniority is junior/entry
   python li.py job <job_id> <out_dir>
       writes <out_dir>/<job_id>/jd.txt; prints a screening summary, not the description
   python li.py company <linkedin company url>
@@ -15,10 +15,12 @@ SENIOR = re.compile(r'\b(senior|sr|lead|principal|staff|head|manager|director|ar
 STACK = ['GCP', 'Google Cloud', 'AWS', 'Azure', 'Terraform', 'Ansible', 'Kubernetes', 'Docker', 'Jenkins', 'ArgoCD',
          'GitLab', 'GitHub Actions', 'Prometheus', 'Grafana', 'OpenTelemetry', 'Vault', 'Linux', 'Python', 'Bash',
          'PowerShell', 'Splunk', 'SAP', 'ServiceNow', 'Windows Server', 'Active Directory', 'VMware']
-try:  # record.json can override the keywords the screening summary looks for
-    STACK = json.load(open(os.path.join(HOME, 'record.json'), encoding='utf-8')).get('target', {}).get('stack_keywords') or STACK
+try:  # record.json tunes the screening: which stack keywords to look for, and the candidate's seniority
+    TARGET = json.load(open(os.path.join(HOME, 'record.json'), encoding='utf-8')).get('target', {})
 except (OSError, ValueError):
-    pass
+    TARGET = {}
+STACK = TARGET.get('stack_keywords') or STACK
+JUNIOR = re.search(r'junior|entry|graduate|intern|fresh', TARGET.get('seniority') or '', re.I)
 
 
 def get(url):
@@ -60,7 +62,7 @@ def search(kw, loc, levels, start='0', days='30'):
         if not jid:
             continue
         title = grab(r'base-search-card__title">(.*?)</h3>', li) or ''
-        if jid.group(1) in seen or SENIOR.search(title):
+        if jid.group(1) in seen or (JUNIOR and SENIOR.search(title)):
             dropped += 1
             continue
         jobs.append({'job_id': jid.group(1), 'title': title,

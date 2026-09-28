@@ -28,7 +28,7 @@ Type `/apply to devops roles in dubai` and Claude Code finds real openings, writ
 
 1. **Preflight.** It reads the role and location from your command, shows a 3-line plan and waits for your go.
 2. **Hunt** (`apply-hunt`, Haiku). It searches LinkedIn's public job pages while logged out. If it finds fewer than 3 matches, it widens to similar titles and then one seniority level up.
-   - A small Python helper (`li.py`) filters out senior titles and jobs you've already seen in code, so they cost no tokens.
+   - A small Python helper (`li.py`) filters out jobs you've already seen in code, plus senior titles if your target is junior, so they cost no tokens.
    - It skips roles that need more experience than you have, nationals-only roles, and single-product roles.
 3. **Tailor** (`apply-cv`, Sonnet). It writes a CV from your `record.json` only, mirroring the job's wording where it's true. Every job runs in parallel.
 4. **Gate** (`apply-ats`, Opus). A fresh recruiter agent sees only the PDF and the job post, and scores it out of 100.

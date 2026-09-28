@@ -22,7 +22,7 @@ python "$HOME/.claude/skills/apply/li.py" job <job_id> "<OUT>"
 python "$HOME/.claude/skills/apply/li.py" company <company_url>
 ```
 
-- **`search`** returns up to 10 jobs per page (`start` = 0, 10, 20…) from the past `days` (default 30). It already drops jobs the candidate has seen and senior/lead/manager titles. `f_E`: 1 = Internship, 2 = Entry level, 3 = Associate, 4 = Mid-Senior.
+- **`search`** returns up to 10 jobs per page (`start` = 0, 10, 20…) from the past `days` (default 30). It already drops jobs the candidate has seen, plus senior/lead/manager titles when the record's seniority is junior or entry level. `f_E`: 1 = Internship, 2 = Entry level, 3 = Associate, 4 = Mid-Senior.
 - **`job`** saves the full description to `OUT/<id>/jd.txt`, marks the job as seen, and prints a screening summary: `years`, `nationality`, `visa_iqama`, `certs` snippets, `stack` hits and `criteria`. **Decide from the summary.** Only open `jd.txt` for jobs you keep, when you write the gist.
 - **`company`** returns about, industry, size, HQ and website.
 
@@ -34,14 +34,14 @@ Stop as soon as you have `MAX` keepers. Only move to the next step while you hav
 1. `ROLE` at the seniority level that matches `PROFILE`.
 2. Similar titles for that role family, at the same level.
 3. One seniority level wider.
-4. Only if you were told to reach `MAX`: `start` up to 50, `days` 60–90, and more junior-leaning variants of the titles.
+4. Only if you were told to reach `MAX`: `start` up to 50, `days` 60–90, and title variants closer to `PROFILE`'s level (e.g. Junior / Graduate for an entry-level profile).
 
 Filter on the search titles first, then run `job` only on the ones you might keep.
 
 ## Reject when
 
 - **Experience:** the summary shows a minimum that's clearly above the candidate's experience.
-- **Seniority:** it's senior, lead or manager work in substance, whatever the title says.
+- **Seniority:** it's clearly above `PROFILE`'s seniority in substance, whatever the title says.
 - **Nationality:** it's restricted to nationals of a country the candidate isn't from. "Encouraged" or "preferred" is fine.
 - **Local residency:** it needs an existing local work permit or visa transfer, when the candidate doesn't have one.
 - **Hard requirements:** a mandatory certification or clearance the profile doesn't mention.
